@@ -41,7 +41,7 @@ install_missing_packages_cran_cran = function(pkg, version = NULL, verbose = TRU
   if(missingPackage){
     #install.packages(pkg)
     for(p in pkg){
-      print(p)
+      #print(p)
       install.packages(p)
     }
     
