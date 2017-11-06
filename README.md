@@ -51,7 +51,7 @@ The following R code will launch Shiny-phyloseq on most systems.
 
 ```r
 install.packages("shiny") 
-shiny::runGitHub("shiny-phyloseq","joey711")
+shiny::runGitHub("shiny-mi","2533245542")
 ```
 
 See the 
