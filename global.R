@@ -1,6 +1,7 @@
 # load packages
 # Run the auto-installer/updater code:
 source("install.R", local = TRUE)
+source("install_cran.R", local = TRUE)
 # Default options for app startup
 source("core/default-parameters.R", local = TRUE)
 # For pasting times into things
