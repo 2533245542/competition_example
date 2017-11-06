@@ -52,9 +52,9 @@ install_missing_packages_cran_cran = function(pkg, version = NULL, verbose = TRU
 # Define list of package names and required versions.
 ################################################################################
 deppkgs = c(miLineage = "2.0",
-ape = "5.0",
+ape = "4.1",
 mgcv = "1.8.22",
-lazyeval = "0.2.1"
+lazyeval = "0.2.0"
 )
 # Loop on package check, install, update
 pkg1 = mapply(install_missing_packages_cran_cran,
