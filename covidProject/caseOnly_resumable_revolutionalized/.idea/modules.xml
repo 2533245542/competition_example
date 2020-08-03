@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../grandTuning2/cnnClean/.idea/caseOnly_MAE_CNN.iml" filepath="$PROJECT_DIR$/../grandTuning2/cnnClean/.idea/caseOnly_MAE_CNN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/caseOnly_resumable_revolutionalized.iml" filepath="$PROJECT_DIR$/.idea/caseOnly_resumable_revolutionalized.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../createAndRun/.idea/createAndRun.iml" filepath="$PROJECT_DIR$/../createAndRun/.idea/createAndRun.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../createAndRunParameterTune/.idea/createAndRunParameterTune.iml" filepath="$PROJECT_DIR$/../createAndRunParameterTune/.idea/createAndRunParameterTune.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../editData/.idea/editData.iml" filepath="$PROJECT_DIR$/../editData/.idea/editData.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../grandTuning/.idea/grandTuning.iml" filepath="$PROJECT_DIR$/../../grandTuning/.idea/grandTuning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../grandTuning2/.idea/grandTuningEnhanced.iml" filepath="$PROJECT_DIR$/../grandTuning2/.idea/grandTuningEnhanced.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,7 @@
+We have tested the usability of log4j2.
+It is usable.
+To use, we need to add a logger and appender pair for a technique
+
+for example, we have made a logger for technique32. Whatever passed to the logger is printed to file "log/reportOfTechnique32.csv".
+
+It uses an appender called "technique32Report" which outputs log to file "log/reportOfTechnique32.csv", and a logger called "technique32"

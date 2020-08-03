@@ -1,0 +1,64 @@
+In this project, we will be using the model to predict the number of walk-in's in the coming 14 days.
+
+The data will be split to 3 parts, the training set, validation set, and test set.
+
+The trainning set and validation are similar to what we have in CNNSixSiteModel. What is different is the test set.
+
+In here, the test set contains only 14 days.
+
+To generate the 3 sets of data, we do the following. We first form the test set by taking away 14 latest data points
+from the bottom of the dataset. We then use the remained dataset to form the train and validation test. After that, we
+do what we did in CNNsixSitesModel as usually. What is different is that we do not stop after we get the MAE. In here,
+we first use both the train data to train the model, the validation for tuning hyperparameters, and we calculate a new
+MAE called MAE_n_day on the 14 days data. We will print it to the terminal.
+
+Also, different from CNNsixSitesModel, we do not use Chris's model as baseline anymore. Instead, we will use our model.
+Our model is already better than Chris by 40%. It is natural and very like correct to assume that our model will be
+better at predicting 14 days than Chris's. It is probably also safe to assume that this project's performance will be
+better than CNNSixSitesModel because we have a less challenging prediction task in which only 14 days are predicted.
+
+Thus, the baseline in this project will be the performance of CNNsixSitesModel.
+
+To finish this project, we have the below tasks to do:
+
+modify runSeven.py such that line 47 reflects the loss of CNNsixSitesModel instead of Chris' model.
+"prev_df = pd.DataFrame({'hospital': ['663', '663A4', '663GA', '663GB', '663GC', '663GD', '663GE'], 'loss': [1.49, 1.36, 2.30, 2.31, 1.44, 1.14, 1.42]})"
+
+for each of the model:
+    663A4baseLSTMMultivariate.py
+    663baseLSTMMultivariate.py
+    663GAbaseLSTMMultivariate.py
+    663GBbaseLSTMMultivariate.py
+    663GCbaseLSTMMultivariate.py
+    663GDbaseLSTMMultivariate.py
+    663GEbaseLSTMMultivariate.py
+At the beginning, reserve a 14 days data called X_test_n_day and y_test_n_day
+  1 in line 61, create train_length,  test_length, test_n_day_length
+        test_n_day_length = 14
+        train_length = math.floor((len(data) - test_n_day_length) * train_ratio)
+        test_length = len(data) - test_n_day_length - train_length
+  1.1 check if test_n_day_length is smaller than seq_in
+
+  1 in line 63 and 64, use train_length to calculate train_mean and train_std
+        train_mean = np.mean(data[:train_length], axis=0)
+        train_std = np.std(data[:train_length], axis=0)
+  2 in line 68, create
+        X_train, y_train = split_sequences(data[:train_length], n_steps_in, n_steps_out)
+        X_test, y_test = split_sequences(data[train_length:train_length + test_length], n_steps_in, n_steps_out)
+        X_test_n_day, y_test_n_day = split_sequences(data[train_length + test_length:], n_steps_in, n_steps_out)
+        # check length of X_test_n_day here
+  3 in line 88, after # fit model, add
+        X_test_n_day = X_test_n_day.reshape((X_test_n_day.shape[0], n_seq, n_steps, n_features))
+
+  4 in line 116, add
+        # %% test future n days
+        yhat_n_day = model.predict(x=X_test_n_day, verbose=0)
+        y_test_n_day = y_test_n_day * train_std[0] + train_mean[0]
+        yhat_n_day = yhat_n_day * train_std[0] + train_mean[0]
+
+        # post processing
+        yhat_n_day = pd.Series(yhat_n_day.reshape(-1)).apply(math.floor).apply(lambda x: x if x > 0 else 0)
+        y_test_n_day = pd.Series(y_test_n_day.reshape(-1))
+        loss_mae_n_day = np.abs(yhat_n_day - y_test_n_day).mean()
+        print('MAE_n_day')
+        print(loss_mae_n_day)

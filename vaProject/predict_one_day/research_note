@@ -1,0 +1,126 @@
+* fixed: I closed this project without noticing that not all model's train_ratio is set to 1 and test_length is set to 0.
+The problem of this will be using only a part of the data for training the model. We should not do that, but luckily, it
+is found out and fixed.
+
+This is a follow-up project for externalFeature_model.
+
+In externalFeature_model, for example, if we have 1000 data points in total, we use 986 for training. The model, after trained,
+produces 14 days of data at a time; that is it is using 984 data points to predict the future day 1, 2, ..., 14's walk-in.
+
+However, it seems this is not Paul wants, and we are going to make some changes.
+
+In this project, we will do a slight change. We will still use 984 data points to train the model. The model, after trained,
+however, produces only 1 day of data at a time; that is, it is using 983 data points to predict the future day 14's walk-in.
+
+Actually, I just realized the last project is not quite accurate. The way it actually works is that, given tomorrow's date,
+is_monday, ..., is_January, ..., climate, predict tomorrow's walk-in. However, even though we know the date tomorrow and
+the is_monday, ..., is_January, etc., we do not know the Google Trend and climate for tomorrow. This is not right. So
+predicting one day 14 days ahead is the more accurate solution here.
+
+####################################################################################################
+What do I do?
+
+We should change the way we process the data.
+
+Plan:
+For each model
+
+1. paste split_sequences_one_day in line 30 to replace  split_sequences
+
+def split_sequences_one_day(sequences, n_steps_in, n_steps_out):
+    ''' sequences is a 2D matrix, n_steps_in is the length of X, n_steps_out is the length of y
+    For example, n_steps_in = 4 and n_steps_out = 3 meaning that we use day 1-4's *data* to predict day 7's *target*
+    *data* means all columns of sequences
+    *target* means the first column of sequences
+    '''
+    X, y = list(), list()
+    for i in range(len(sequences)):
+        # find the end of this pattern
+        end_ix = i + n_steps_in
+        out_end_ix = end_ix + n_steps_out
+        # check if we are beyond the dataset
+        if out_end_ix > len(sequences):
+            break
+        # gather input and output parts of the pattern
+        seq_x, seq_y = sequences[i:end_ix, :], sequences[out_end_ix-1:out_end_ix, 0]
+        X.append(seq_x)
+        y.append(seq_y)
+    return array(X), array(y)
+
+def split_sequences(sequences, n_steps_in, n_steps_out):
+    X, y = list(), list()
+    for i in range(len(sequences)):
+        # find the end of this pattern
+        end_ix = i + n_steps_in
+        out_end_ix = end_ix + n_steps_out
+        # check if we are beyond the dataset
+        if out_end_ix > len(sequences):
+            break
+        # gather input and output parts of the pattern
+        seq_x, seq_y = sequences[i:end_ix, :], sequences[end_ix:out_end_ix, 0]
+        X.append(seq_x)
+        y.append(seq_y)
+    return array(X), array(y)
+
+
+2. in line 62, change n_steps_out to 14
+
+3. change usage of split_sequences to split_sequences_one_day
+
+Done searching again... now it is 10% worst and I assume it is because I did not tune hyerparameter well.
+
+It seems all predicted day are 4 walk-in. Let's figure it out a little bit. But only after we have done the windowing.
+
+if train_length decreases, test_length will remain the same, but the data window will slide one day to the left.
+    X_test_n_day, y_test_n_day = split_sequences(data[train_length + test_length:train_length + test_length + test_n_day_length], n_steps_in, n_steps_out)
+we use i to represent the number of days sliding to the left.
+    when i=0, no sliding
+    when i = 1, slide one day to the left
+    ...
+we achieve this by substrating i from train_length in line 66
+
+we also record the MAE in each iteration such that we can calculate an average later on.
+hence, the sliding window approach is finished.
+
+The result is shown below, compared to the best model we used to have. We are sliding window to the left for 40 times.
+The result is quite similar
+
+       diff   site
+0 -0.199565    663
+1  0.015379  663A4
+2  0.257453  663GA
+3 -0.046884  663GB
+4 -0.266292  663GC
+5 -0.186147  663GD
+6 -0.073359  663GE
+overall -0.07134505314414923
+
+
+####################################################################################################
+# #%%
+# def split_sequences_one_day(sequences, n_steps_in, n_steps_out):
+#     ''' sequences is a 2D matrix, n_steps_in is the length of X, n_steps_out is the length of y
+#     For example, n_steps_in = 4 and n_steps_out = 3 meaning that we use day 1-4's *data* to predict day 7's *target*
+#     *data* means all columns of sequences
+#     *target* means the first column of sequences
+#     '''
+#     X, y = list(), list()
+#     for i in range(len(sequences)):
+#         # find the end of this pattern
+#         end_ix = i + n_steps_in
+#         out_end_ix = end_ix + n_steps_out
+#         # check if we are beyond the dataset
+#         if out_end_ix > len(sequences):
+#             break
+#         # gather input and output parts of the pattern
+#         seq_x, seq_y = sequences[i:end_ix, :], sequences[out_end_ix-1:out_end_ix, 0]
+#         X.append(seq_x)
+#         y.append(seq_y)
+#     return array(X), array(y)
+#
+# twoD = np.column_stack((np.arange(100).reshape(100, 1), np.arange(100).reshape(100, 1)))
+# split_sequences_1(twoD, 4, 2)[0][0]
+# split_sequences_1(twoD, 4, 2)[1][0] # need to produce array([5]), meaning that predicting the 2nd day's walk-in
+
+
+

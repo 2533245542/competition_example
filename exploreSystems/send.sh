@@ -1,0 +1,1 @@
+scp numpyTest.py wzhou87@172.22.100.50:exploreSystems

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (caseOnly_resumable_revolutionalized)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="editData" />
+    <orderEntry type="module" module-name="createAndRun" />
+    <orderEntry type="module" module-name="createAndRunParameterTune" />
+    <orderEntry type="module" module-name="grandTuningEnhanced" />
+    <orderEntry type="module" module-name="caseOnly_MAE_CNN" />
+    <orderEntry type="module" module-name="grandTuning" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="format" value="PLAIN" />
+    <option name="myDocStringFormat" value="Plain" />
+    <option name="renderExternalDocumentation" value="true" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="pytest" />
+  </component>
+</module>

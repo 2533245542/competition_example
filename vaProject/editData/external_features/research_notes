@@ -1,0 +1,211 @@
+The external features contain the following file.
+
+Influenza_Disease.csv
+Rain_topic.csv
+Snow_topic.csv
+Traffic_congestion_topic.csv
+Vacation_topic.csv
+climate_wa_1.csv
+climate_wa_2.csv
+climate_wa_3.csv
+climate_wa_4.csv
+climate_wa_5.csv
+climate_wa_6.csv
+climate_wa_7.csv
+climate_wa_8.csv
+climate_wa_9.csv
+climate_wa_10.csv
+
+The first five ones are from google trend. They are the search topics in Seattle-Tacoma, WA (defined by Google and it
+is basically the greater Seattle area, includes all VA clinics of interest in this study ). These are topics instead of
+search term. Google defines a search topic to be an umbrella of a lot of related terms. For example, "influenza" contains
+the search term of flu. By using search topic instead of search term, we can make sure we cover most of the terms related
+to the topic we are interested.
+
+Google trend data, however, has a problem, that the smallest unit of a data point is week. A data point is a summary of
+ the last 7 days' record. That means we can not have data for each day. The other problem is the earliest data Google
+ allows us to download in a weekly scale is 5 years ago. So it is 2015/03. Our earliest data for walk-in's is 2015/01,
+ we will not lose two months of data, but I suppose it would not affect much.
+
+Rationale for choosing these features:
+Influenza: people are concerned about health and will have more walk-in's.
+Rain: people search rain because they are concerned about going out. So they are less likely to have walk-in's.
+Snow: same as rain.
+Traffic congestion: same as rain.
+Vacation: it means it is, or is about to be the vacation period, people might have less walk-in's.
+
+The last several are climate data of Washington State by climate station, downloaded from the US government, from 2015
+day1 to 2019 day 365. (https://www.ncdc.noaa.gov/cdo-web/). They are not in a file because we are not allowed to download
+too much at a time.
+
+To make the climate features most useful, and because each VA clinic has quite a different location, we would like to
+use the climate data measured by to closest station to the clinic.
+
+To do this, I created a google map with the locations of VA clinics and climate stations. By eyeballing it, we can find
+the most suitable climate stations for each VA clinic.
+
+However, not all stations have a complete coverage from 2015 to 2019. We need to make a balance between the time period
+coverage and the proximity to the clinic.
+
+(map of climate stations and VA clinics: https://drive.google.com/open?id=1vZ-58Lf79epxsNHnOpriPMeo_7-GCcJ6&usp=sharing,
+The orange ones are VA clinics, blues ones are climate stations, purple ones are climate stations that record
+temperatures )
+
+Below shows the stations chosen for each VA clinic:
+
+Mt Vernon Cboc VA (663GC, Mount Vernon VA Clinic):
+    MOUNT VERNON 0.6 N, WA US, 76773, LATITUDE, 48.4297028, LONGITUDE, -122.3148193
+    MOUNT VERNON 1.1 E, WA US, 89678, LATITUDE, 48.420153, LONGITUDE, -122.290867
+    MOUNT VERNON 0.8 SW, WA US, 94104, LATITUDE, 48.41298, LONGITUDE, -122.324868
+    MOUNT VERNON 1.8 SW, WA US, 80559, LATITUDE, 48.407597, LONGITUDE, -122.346285
+
+North Olympic Peninsula CBOC (663GE, North Olympic Peninsula VA Clinic):
+    PORT ANGELES FAIRCHILD INTERNATIONAL AIRPORT, WA US, 31904, LATITUDE, 48.12028, LONGITUDE, -123.49833
+    PORT ANGELES 6.0 S, WA US, 77859, LATITUDE, 48.10474, LONGITUDE, -123.448974
+    PORT ANGELES 6.1 SSE, WA US, 93180, LATITUDE, 48.105026, LONGITUDE, -123.431224
+    PORT ANGELES 6.7 SSE, WA US, 79868, LATITUDE, 48.098, LONGITUDE, -123.42
+    PORT ANGELES 8.2 SE, WA US, 76009, LATITUDE, 48.09812, LONGITUDE, -123.347516
+
+9177 Ridgetop Blvd NW (663GB, Silverdale VA Clinic):
+    POULSBO 3.7 NNW, WA US, 30197, LATITUDE, 47.785564, LONGITUDE, -122.672994
+    SUQUAMISH 1.4 E, WA US, 11650, LATITUDE, 47.731691, LONGITUDE, -122.5553547
+    BREMERTON 2.8 NE, WA US, 36913, LATITUDE, 47.6012955, LONGITUDE, -122.6042633
+    TRACYTON 2.3 WSW, WA US, 15512, LATITUDE, 47.601331, LONGITUDE, -122.701281
+    BREMERTON 1.8 NE, WA US, 16248, LATITUDE, 47.585688, LONGITUDE, -122.609216
+    BREMERTON 2.9 NNE, WA US, 33889, LATITUDE, 47.585187, LONGITUDE, -122.67157
+    BREMERTON 2.9 NNE, WA US, 34001, LATITUDE, 47.585043, LONGITUDE, -122.669406
+
+1660 S Columbian Way (663, Seattle VA Medical Center):
+    SEATTLE 5.8 SSE, WA US, 83383, LATITUDE, 47.543999, LONGITUDE, -122.30381
+    SEATTLE 5.1 SE, WA US, 66893, LATITUDE, 47.546121, LONGITUDE, -122.268492
+    SEATTLE BOEING FIELD, WA US, 32445, LATITUDE, 47.53028, LONGITUDE, -122.30083
+
+13033 Bel-Red Rd (663GA, Bellevue VA Clinic) :
+    BELLEVUE 1.8 W, WA US, 51389, LATITUDE, 47.604565, LONGITUDE, -122.193107
+    BELLEVUE 0.8 S, WA US, 60680, LATITUDE, 47.59163, LONGITUDE, -122.1549
+
+32020 32nd Ave S (663GF,  Federal Way VA Clinic):
+    AUBURN 3.5 NW, WA US, 51932, LATITUDE, 47.340171, LONGITUDE, -122.255311
+    LAKELAND NORTH 0.5 ENE, WA US, 47714, LATITUDE, 47.3308, LONGITUDE, -122.2673
+    DES MOINES 2.9 S, WA US, 48032, LATITUDE, 47.353863, LONGITUDE, -122.318054
+    FEDERAL WAY 2.5 NNE, WA US, 44214, LATITUDE, 47.346, LONGITUDE, -122.322
+
+9600 Veterans Dr SW (663A4, American Lake VA Medical Center):
+    STEILACOOM 0.4 NW, WA US, 53404, LATITUDE, 47.173931, LONGITUDE, -122.597814
+    PARKLAND 1.0 WSW, WA US, 62921, LATITUDE, 47.13094, LONGITUDE, -122.448051
+    PARKLAND 0.9 NE, WA US, 93348, LATITUDE, 47.14734, LONGITUDE, -122.416869
+    SUMMIT 1.1 WSW, WA US, 93510, LATITUDE, 47.165323, LONGITUDE, -122.378317
+
+M2PR+VV Chehalis, WA (663GD, South Sound VA Clinic):
+    CENTRALIA, WA US, 12366, LATITUDE, 46.72, LONGITUDE, -122.9527
+    CENTRALIA 1.6 W, WA US, 15937, LATITUDE, 46.723588, LONGITUDE, -122.995758
+
+In terms of attributes from the climate data, we will use the following 5 core attributes ("core" as defined by the website)
+
+PRCP = Precipitation (mm or inches as per user preference, inches to hundredths on Daily Form pdf file)
+SNOW = Snowfall (mm or inches as per user preference, inches to tenths on Daily Form pdf file)
+SNWD = Snow depth (mm or inches as per user preference, inches on Daily Form pdf file)
+TMAX = Maximum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on Daily Form pdf file
+TMIN = Minimum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on Daily Form pdf file
+
+It turns out that SNWD is usually NA and we do not consider that. PRCP is in most of the stations. Temperature record,
+however, is rare for a station to monitor.
+
+So I added the stations that record temperatures on the google map; we will also select the closest station by eyeballing.
+
+Now the selected temperature station for each clinic is:
+
+Mt Vernon Cboc VA (663GC, Mount Vernon VA Clinic):
+    (new station)SEDRO WOOLLEY, WA US, 96810, LATITUDE, 48.4958, LONGITUDE, -122.2355
+North Olympic Peninsula CBOC (663GE, North Olympic Peninsula VA Clinic):
+    (already included)PORT ANGELES FAIRCHILD INTERNATIONAL AIRPORT, WA US, 31904, LATITUDE, 48.12028, LONGITUDE, -123.49833
+9177 Ridgetop Blvd NW (663GB, Silverdale VA Clinic):
+    (new station)BREMERTON, WA US, 58770, LATITUDE, 47.5688, LONGITUDE, -122.6827,
+1660 S Columbian Way (663, Seattle VA Medical Center):
+    (already included)SEATTLE BOEING FIELD, WA US, 32445, LATITUDE, 47.53028, LONGITUDE, -122.30083
+13033 Bel-Red Rd (663GA, Bellevue VA Clinic) :
+    (new station) RENTON MUNICIPAL AIRPORT, WA US, 34634, LATITUDE, 47.49333, LONGITUDE, -122.21444
+32020 32nd Ave S (663GF,  Federal Way VA Clinic):
+    (new station)SEATTLE TACOMA INTERNATIONAL AIRPORT, WA US, 29702, LATITUDE, 47.4444, LONGITUDE, -122.3138
+    (new station)KENT, WA US, 82833, LATITUDE, 47.4172, LONGITUDE, -122.2433
+    (new station)TACOMA NUMBER 1, WA US, 49203, LATITUDE, 47.2472, LONGITUDE, -122.4122
+9600 Veterans Dr SW (663A4, American Lake VA Medical Center):
+    (new station)TACOMA NUMBER 1, WA US, 49203, LATITUDE, 47.2472, LONGITUDE, -122.4122
+    (new station)MCMILLIN RESERVOIR, WA US, 91569, LATITUDE, 47.1358, LONGITUDE, -122.2558
+M2PR+VV Chehalis, WA (663GD, South Sound VA Clinic):
+    (already included)CENTRALIA, WA US, 11941, LATITUDE, 46.72, LONGITUDE, -122.9527
+
+So each clinic will have a set of stations for recording precipitation and a set of stations recording temperatures.
+
+In practice, we see that precipitation has very few NA values, we use min(precipitation of other stations) to fill NA.
+We use mean because the station might be recording no precipitation or fail to record. To make a balance between these two
+possibilities, we use the min.
+
+In contrast, snow has a lot of NA values, and in most of the time in Seattle, there is no snow. In this case,
+we fill them with 0 value.
+
+It turns out that the max and min temperatures have NA's as well, but the amount of NA is very small. In this case,
+we fill NA using the value of the previous day. In this case, the temperature station for each clinic is only one (except
+that 663A4 has two, in which case we choose a random station for each NA filling), so filling NA with the previous day
+value is a reasonable choice.
+
+We have the problem that both (precipitation, snow) and (min temp, max temp) are not completely continuous in terms of a
+time series. We fill NA using the previous day's data. Luckly, the number of NA's is small.
+
+####################################################################################################
+process each google trend file such that it has data poin for each day, using backward fill to fill NA .
+
+combine google trend data, where index is date
+
+process climate data and extract useful features
+    combine all files together
+    put ['STATION', 'NAME', 'LATITUDE', 'LONGITUDE', 'DATE','PRCP', 'SNOW', 'SNWD', 'TMAX', 'TMIN'] attributes from the dataframe
+    pull stations below from the dataframe, each result will be stored in a dataframe
+
+Mt Vernon Cboc VA (663GC, Mount Vernon VA Clinic):
+    ['MOUNT VERNON 0.6 N, WA US', 'MOUNT VERNON 1.1 E, WA US', 'MOUNT VERNON 0.8 SW, WA US', 'MOUNT VERNON 1.8 SW, WA US']
+North Olympic Peninsula CBOC (663GE, North Olympic Peninsula VA Clinic):
+    ['PORT ANGELES FAIRCHILD INTERNATIONAL AIRPORT, WA US', 'PORT ANGELES 6.0 S, WA US', 'PORT ANGELES 6.1 SSE, WA US', 'PORT ANGELES 6.7 SSE, WA US', 'PORT ANGELES 8.2 SE, WA US']
+9177 Ridgetop Blvd NW (663GB, Silverdale VA Clinic):
+    ['POULSBO 3.7 NNW, WA US', 'SUQUAMISH 1.4 E, WA US', 'BREMERTON 2.8 NE, WA US', 'TRACYTON 2.3 WSW, WA US', 'BREMERTON 1.8 NE, WA US', 'BREMERTON 2.9 NNE, WA US', 'BREMERTON 2.9 NNE, WA US']
+1660 S Columbian Way (663, Seattle VA Medical Center):
+    ['SEATTLE 5.8 SSE, WA US', 'SEATTLE 5.1 SE, WA US', 'SEATTLE BOEING FIELD, WA US']
+13033 Bel-Red Rd (663GA, Bellevue VA Clinic) :
+    'BELLEVUE 1.8 W, WA US', 'BELLEVUE 0.8 S, WA US',
+32020 32nd Ave S (663GF,  Federal Way VA Clinic):
+    ['AUBURN 3.5 NW, WA US', 'LAKELAND NORTH 0.5 ENE, WA US', 'DES MOINES 2.9 S, WA US', 'FEDERAL WAY 2.5 NNE, WA US']
+9600 Veterans Dr SW (663A4, American Lake VA Medical Center):
+    ['STEILACOOM 0.4 NW, WA US', 'PARKLAND 1.0 WSW, WA US', 'PARKLAND 0.9 NE, WA US', 'SUMMIT 1.1 WSW, WA US']
+M2PR+VV Chehalis, WA (663GD, South Sound VA Clinic):
+    ['CENTRALIA, WA US', 'CENTRALIA 1.6 W, WA US']
+
+find stations that record temperatures, put them on google map
+
+Mt Vernon Cboc VA (663GC, Mount Vernon VA Clinic):
+    ['SEDRO WOOLLEY, WA US']
+North Olympic Peninsula CBOC (663GE, North Olympic Peninsula VA Clinic):
+    ['PORT ANGELES FAIRCHILD INTERNATIONAL AIRPORT, WA US']
+9177 Ridgetop Blvd NW (663GB, Silverdale VA Clinic):
+    ['BREMERTON, WA US']
+1660 S Columbian Way (663, Seattle VA Medical Center):
+    ['SEATTLE BOEING FIELD, WA US']
+13033 Bel-Red Rd (663GA, Bellevue VA Clinic) :
+    ['RENTON MUNICIPAL AIRPORT, WA US']
+32020 32nd Ave S (663GF,  Federal Way VA Clinic):
+    ['SEATTLE TACOMA INTERNATIONAL AIRPORT, WA US', 'KENT, WA US', 'TACOMA NUMBER 1, WA US']
+9600 Veterans Dr SW (663A4, American Lake VA Medical Center):
+    ['TACOMA NUMBER 1, WA US', 'MCMILLIN RESERVOIR, WA US']
+M2PR+VV Chehalis, WA (663GD, South Sound VA Clinic):
+    ['CENTRALIA, WA US']
+
+extract precipitation and snow feature
+extract temperature max and min feature
+check NA existence and if exists, fill it
+combine both feature sets
+
+combine google trend data and climate data where index is date
+
+combine the combined data with walk-in where index is date
+
+edit edit_with_external_features.py
+

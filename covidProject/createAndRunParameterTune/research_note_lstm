@@ -1,0 +1,238 @@
+# made lstmClean handle test data in subRun the same way as run.
+
+set tuning_sliding_window_size
+
+# not-that-intuitive code modification
+set
+# simple code modification
+We are going to add CNN into the model
+
+There are hyperparameters related to CNN
+subRun.py
+line 35: when extracting hyperpatmeres from the variable 'hyperparameters', also extract CNN hyperparemters
+    feature_indices = hyperparameters[0]
+    in_batch_size = hyperparameters[1]
+    steps_ahead = hyperparameters[2]
+    dropout = hyperparameters[3]
+    recurrent_dropout = hyperparameters[4]
+    num_cells = hyperparameters[5]
+    learning_rate = hyperparameters[6]
+    cnn_filters = hyperparameters[7]
+    cnn_kernel_size = hyperparameters[8]
+    cnn_pool_size = hyperparameters[9]
+    cnn_dropout = hyperparameters[10]
+    cnn_kernel_size = min(in_batch_size, cnn_kernel_size)
+    cnn_pool_size = min(in_batch_size - cnn_kernel_size + 1, cnn_pool_size)
+
+
+
+line 147: change model, and assign the CNN hyperparameters
+X_train = X_train.reshape((X_train.shape[0], 1, X_train.shape[1], len(feature_indices)))
+if test_length != 0:
+    X_test = X_test.reshape((X_test.shape[0], 1, X_test.shape[1], len(feature_indices)))
+model = Sequential()
+model.add(TimeDistributed(Conv1D(filters=cnn_filters, kernel_size=cnn_kernel_size, activation='relu'), input_shape=(None, in_batch_size, len(feature_indices))))
+model.add(TimeDistributed(MaxPooling1D(pool_size=cnn_pool_size)))
+model.add(Dropout(cnn_dropout))
+model.add(TimeDistributed(Flatten()))
+model.add(LSTM(num_cells, dropout=dropout, recurrent_dropout=recurrent_dropout))
+model.add(Dense(out_batch_size))
+model.compile(optimizer=Adam(lr=learning_rate), loss=train_loss)
+
+run.py
+line 68: initiate CNN hyperparameters
+hyperparameters, feature_indices, in_batch_size, steps_ahead, dropout, recurrent_dropout, num_cells, learning_rate, cnn_filters, cnn_kernel_size, cnn_pool_size, cnn_dropout = 1,1,1,1,1,1,1,1,1,1,1,1  # need to make variabels contain something to make it picklable
+
+line 75: load CNN hyperparameters
+hyperparameters = pickle.load(f)
+feature_indices = pickle.load(f)
+in_batch_size = pickle.load(f)
+steps_ahead = pickle.load(f)
+dropout = pickle.load(f)
+recurrent_dropout = pickle.load(f)
+num_cells = pickle.load(f)
+learning_rate = pickle.load(f)
+cnn_filters = pickle.load(f)
+cnn_kernel_size = pickle.load(f)
+cnn_pool_size = pickle.load(f)
+cnn_dropout = pickle.load(f)
+
+line 96: save CNN hyperparemters
+pickle.dump(hyperparameters, f)
+pickle.dump(feature_indices, f)
+pickle.dump(in_batch_size, f)
+pickle.dump(steps_ahead, f)
+pickle.dump(dropout, f)
+pickle.dump(recurrent_dropout, f)
+pickle.dump(num_cells, f)
+pickle.dump(learning_rate, f)
+pickle.dump(cnn_filters, f)
+pickle.dump(cnn_kernel_size, f)
+pickle.dump(cnn_pool_size, f)
+pickle.dump(cnn_dropout, f)
+
+line 132: extract CNN hyperparemtaers
+feature_indices = hyperparameters[0]
+in_batch_size = hyperparameters[1]
+steps_ahead = hyperparameters[2]
+dropout = hyperparameters[3]
+recurrent_dropout = hyperparameters[4]
+num_cells = hyperparameters[5]
+learning_rate = hyperparameters[6]
+cnn_filters = hyperparameters[7]
+cnn_kernel_size = hyperparameters[8]
+cnn_pool_size = hyperparameters[9]
+cnn_dropout = hyperparameters[10]
+cnn_kernel_size = min(in_batch_size, cnn_kernel_size)
+cnn_pool_size = min(in_batch_size - cnn_kernel_size + 1, cnn_pool_size)
+
+
+
+line 221: assign CNN hyperparameters
+X_train = X_train.reshape((X_train.shape[0], 1, X_train.shape[1], len(feature_indices)))
+X_test = X_test.reshape((X_test.shape[0], 1, X_test.shape[1], len(feature_indices)))
+model = Sequential()
+model.add(TimeDistributed(Conv1D(filters=cnn_filters, kernel_size=cnn_kernel_size, activation='relu'), input_shape=(None, in_batch_size, len(feature_indices))))
+model.add(TimeDistributed(MaxPooling1D(pool_size=cnn_pool_size)))
+model.add(Dropout(cnn_dropout))
+model.add(TimeDistributed(Flatten()))
+model.add(LSTM(num_cells, dropout=dropout, recurrent_dropout=recurrent_dropout))
+model.add(Dense(out_batch_size))
+model.compile(optimizer=Adam(lr=learning_rate), loss=train_loss)
+
+
+config.py
+line 68: add hyperparameter space for CNN hyperparameters
+space = [
+    hp.choice('feature_indices', indice_list[-1:]),
+    hp.choice('in_batch_size', [4,9]),
+    hp.choice('steps_ahead', [1]),
+    hp.choice('dropout', [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]),
+    hp.choice('recurrent_dropout', [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]),
+    hp.choice('num_cells', [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]),
+    hp.lognormal('learning_rate', np.log(.01), 3.),
+    hp.choice('cnn_filters', [10, 20, 30, 50, 70, 100, 130, 160]),
+    hp.choice('cnn_kernel_size', [1,3,5,7,9]),
+    hp.choice('cnn_pool_size', [1,2,3,4,5,6]),
+    hp.choice('cnn_dropout', [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8])
+]
+
+
+####################################################################################################
+model = Sequential()
+model.add(TimeDistributed(Conv1D(filters=cnn_filters, kernel_size=cnn_kernel_size, activation='relu'), input_shape=(in_batch_size, len(feature_indices))))
+model.add(TimeDistributed(MaxPooling1D(pool_size=cnn_pool_size)))
+model.add(Dropout(cnn_dropout))
+model.add(TimeDistributed(Flatten()))
+model.add(LSTM(num_cells, dropout=dropout, recurrent_dropout=recurrent_dropout))
+model.add(Dense(out_batch_size))
+model.compile(optimizer=Adam(lr=learning_rate), loss=train_loss)
+
+cnn_filters
+cnn_kernel_size
+cnn_pool_size
+cnn_dropout
+
+
+
+model = Sequential()
+model.add(LSTM(num_cells, dropout=dropout, recurrent_dropout=recurrent_dropout, input_shape=(in_batch_size, len(feature_indices))))
+model.add(Dense(out_batch_size))
+model.compile(optimizer=Adam(lr=learning_rate), loss=train_loss)
+
+# experiment
+
+## 1
+change config
+Q:go to app14 to test for 10 times using MAE
+go to gpu to test for 10 times using MSE
+A:result is MAE much better than MSE
+
+python create.py; python execute.py; python result.py
+scp -r ../createAndRunParameterTune wzhou87@172.22.100.50:~/tmp/slidingTuning
+scp -r ../createAndRunParameterTune wzhou87@app14:~/tmp/slidingTuning
+
+lstmClean_v1 2.1808558363325856 0.24565742639118113 [2.469157898065567, 2.6284260040045635, 2.105646175564745, 2.028600662352801, 1.8306222764449929, 2.14384121893574, 2.301325681872958, 1.8433771672462176, 2.3594871979737464, 2.098074080864524]
+lstmClean_v1 2.7456424560369244 0.6931045987919539 [2.3642161162211695, 2.9075188736659383, 2.3095674993566155, 2.454726460792352, 2.6560543305552873, 2.739943869895185, 2.5783934381484803, 2.785255785026526, 1.9820354478432365, 4.
+
+## 2
+Q: what if we tune very few times? On app14
+A: becomes low accuracy and very unstable
+lstmClean_v1 2.657038784763195 0.8575053452521371 [4.891127436980694, 2.954577446063155, 1.9460928548628753, 2.226226086599069, 2.8467459169576523, 2.000376950016245, 2.0270454905038284, 3.234021986504045, 2.281534286577793, 2.162639392566591]
+
+## 3
+test different number_of_test_data_in_tuning. On bime
+Q: can using more or less number_of_test_data_in_tuning improve stability?
+lstmClean_v2 5.784939167410275 3.981571536034662 [2.9354363971435884, 4.947578226861084, 6.305887740385682, 2.5176464731484245, 13.632135202271076, 12.927297823981934, 3.1264862233920363, 2.210606146449954, 5.969862402124373, 3.2764550383446025]
+lstmClean_v3 5.673758917887818 6.06872856283885 [2.18390766477127, 3.526390966501807, 5.042270123594687, 2.9048372529856037, 2.1958964942320747, 4.062242603630852, 23.401260662842393, 2.283574069232089, 6.786473587355984, 4.3507357537314135]
+lstmClean_v4 4.035595863234503 4.5498007071586715 [2.137874288953627, 2.646094132640082, 2.7515565178712933, 2.1538608980870335, 17.635666500497923, 2.148577134981342, 2.022779285453532, 3.1201247303747945, 3.147446533762562, 2.591978609722839]
+lstmClean_v5 2.324111089317202 0.199617520947192 [2.75603957157255, 2.1202942697463083, 2.374259494297605, 2.1845520637659224, 2.486576390557469, 2.1075789687794853, 2.115760769274999, 2.4974712108815464, 2.313421792993389, 2.2851563613027426]
+lstmClean_v7 2.2230438837710693 0.08972724353368866 [2.2621400920684605, 2.2342214236172273, 2.2689835213886878, 2.1126958822739716, 2.1934995922022082, 2.321028103993901, 2.1559490828951082, 2.238983025493212, 2.378527482964461, 2.064410630813454]
+lstmClean_v9 2.2523667173923156 0.15905880955133808 [2.3659199975068232, 2.44021064139009, 1.8903767003207235, 2.316748594428647, 2.1679771857755106, 2.221949849112541, 2.239343339201901, 2.195631002179632, 2.1980825852383648, 2.48742727876892]
+lstmClean_v11 2.254581449072753 0.0728571894751545 [2.3516813093617404, 2.2050359265272648, 2.306984074666279, 2.183092909869511, 2.222149690205137, 2.300703061071756, 2.387738655607241, 2.1591314470517133, 2.2227757709630183, 2.206521645403866]
+
+lstmClean_v5 2.3440069453685752 0.1876331820396504 [2.4248297504256096, 2.286177038952938, 2.3200330428930926, 2.773022182972146, 2.364365874724045, 2.2216830946070543, 2.3426774339620775, 2.1885879011287246, 2.031654398365933, 2.4870387356541293]
+lstmClean_v7 2.2763603165863078 0.051974355972820636 [2.3197859020924576, 2.199900757607213, 2.284453212890051, 2.310549928584511, 2.2469693026789885, 2.282888991123543, 2.197012253880493, 2.253231519500077, 2.2921502713394273, 2.3766610261663175]
+lstmClean_v9 2.1425939552817046 0.12898106815150595 [2.1354527403350207, 2.224956435866643, 1.8075689920596065, 2.139115908760717, 2.124628345442839, 2.287848415662388, 2.238704745089827, 2.18256127257191, 2.229201409303088, 2.0559012877250082]
+lstmClean_v11 2.3527129029211564 0.14203368749474404 [2.4991459542170946, 2.329268793486043, 2.6531078726495143, 2.4147577500976536, 2.171903740055544, 2.2913863579872693, 2.3726196783252296, 2.134045901666051, 2.331036517607677, 2.3298564631194907]
+
+## 4
+Q: what if we tune a lot of times. on app14
+A: not much change
+2.2931418834331843 0.24436813965258086 [2.18037186707254, 2.257976670764385, 2.3422888122960055, 2.236340540934004, 2.0182948152885296, 2.4850907539089553, 2.8238749360530373, 1.890634287189121, 2.43604630679358, 2.2604998440316844]
+
+## 5
+Q: what if we create finer hyperparmeter space? on app14
+A: It becomes more stable
+space = [
+    #hp.choice('feature_indices', indice_list[-1:]),
+    hp.choice('feature_indices', [(0,1,2,3)]),
+    # hp.choice('in_batch_size', [3,4,5,6,7,8]),
+    hp.uniformint('in_batch_size', 2, 8),
+    hp.choice('steps_ahead', [1]),
+    # hp.choice('dropout', [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]),
+    hp.uniform('dropout', 0, 0.8),
+    hp.uniform('recurrent_dropout', 0, 0.8),
+    # hp.quniform('num_cells', [10, 20, 30, 50, 70, 90, 110, 130, 150]),
+    hp.quniform('num_cells', 5, 150, 5),
+    hp.lognormal('learning_rate', np.log(.01), 3.)
+]
+model.add(LSTM(int(num_cells), dropout=dropout, recurrent_dropout=recurrent_dropout, input_shape=(in_batch_size, len(feature_indices))))
+trial1:
+2.2485501225744224 0.10141099483598216 [2.375857456735074, 2.163159413454357, 2.374299766174706, 2.2393699481749403, 2.356120945620802, 2.1355972861095114, 2.3134237682816394, 2.2162926485878875, 2.2468518135821873, 2.0645281790231214]
+trial2:
+2.2698036733953133 0.5319862358332171 [2.063993603801061, 1.9916510629338675, 1.8743975097036585, 2.114977052013161, 2.1910245154222148, 3.8103096818043714, 1.9613208571720828, 2.1965811007120846, 2.0901880060582996, 2.4035933443323283]
+trial3:
+2.1762490085407564 0.06322074046495332 [2.232063071902529, 2.2034176941531323, 2.0724961654710574, 2.2111122147619624, 2.2377293962580698, 2.1086921849108813, 2.195860129294586, 2.067390140297775, 2.2055216544692815, 2.228207433888295]
+
+
+
+## 6 feature use 0,2,3. app14
+Q: will using feature 0,2,3 boost performance
+A: better just use 0,1,2,3
+feature012 2.4417326654478737 0.6622750645646909 [1.9693107037341975, 3.778554919503994, 2.380631741681051, 2.13087550024358, 3.7157774215682293, 2.083192144091655, 2.099442903410845, 2.122520782333166, 1.9543807493453251, 2.1826397885666924]
+feature02 2.4560680409462554 0.28481408692140403 [2.5001631794598964, 2.808505384070789, 2.5493297381646887, 2.3554177718795404, 2.162063538147452, 2.112237808164799, 2.1287960154583994, 2.4465805711510322, 3.0512622507881813, 2.4463241521777723]
+feature03 2.4118894586208457 0.2677103162849964 [2.0949155687638705, 2.6497485249360997, 2.0664526785139175, 2.5246375563423196, 2.2503184637484406, 2.916310107031733, 2.6773588151411163, 2.2433244855027583, 2.489301735086554, 2.2065266511416466]
+
+##  7
+Q: what if using a 1 tuning sliding window and varying tuning test data? app14
+A: not not change
+lstmClean_v1 2.4890608075994316 1.2121201297770143 [2.1751203904989653, 2.0029398172035218, 2.1138903810578102, 1.8176480315331207, 1.6735457700569722, 2.268361845209124, 2.3068980953615683, 2.2442259679519974, 2.209892477404179, 6.078085299717056]
+lstmClean_v3 3.649538488697472 1.4580869465274389 [2.2208354920740394, 3.0897416410994083, 2.5545035084213166, 4.242364395629306, 7.619319845243401, 3.3653759081900114, 2.983325941871158, 2.933702629048708, 3.2228272783850618, 4.263388247012309]
+lstmClean_v5 2.8398661135225582 0.6515386014336605 [2.289051690081956, 2.279925795525162, 3.3621352843680063, 2.378454946219053, 3.7287630485459333, 2.249746936939241, 2.9666011723055745, 2.226498464571684, 2.8084512229279563, 4.109032573741016]
+lstmClean_v7 2.178330249415455 0.12265179332156917 [2.243843408866335, 2.1661888327165184, 2.3109448565742667, 2.268443492891936, 2.3395940519347938, 2.0513845936157575, 2.0133353429785505, 1.9662047790328667, 2.1685432056635303, 2.2548199298799934]
+lstmClean_v10 2.3335845548963943 0.1226359751298901 [2.5806610951871565, 2.3212176222120227, 2.3482634776465505, 2.3471982451621773, 2.246786788355861, 2.4401238986339444, 2.2374245881544153, 2.236345214623113, 2.1352611928710328, 2.4425634261176694]
+lstmClean_v13 2.3550409746379524 0.3937915984101709 [3.3368396901364705, 2.0900262201335416, 1.9769142354728437, 2.4285583210686568, 2.215518862187582, 2.729988338721098, 2.2210487768055187, 2.0574336388697025, 2.0492176555124364, 2.4448640074716734]
+
+
+## 8
+Q: will using a longer train data length increase performance
+A:
+lstmClean_v15 2.105332975442992 0.33212047493269437 [2.0264159500243255, 1.7748886576786564, 1.864980623489996, 2.66294454410699, 2.312059568813378, 1.8433924156394712, 2.746986141305043, 1.8527454072028262, 2.0220708697069836, 1.946845576462248]
+lstmClean_v20 2.3704598619516277 0.42133637820317843 [2.2486312536005015, 2.901442833410422, 2.1042524241067047, 2.1948528858710756, 1.8269287596060442, 2.1340702725611247, 3.2940592474316883, 2.1355721460140793, 2.198334400381449, 2.6664543965331875]
+lstmClean_v30 2.558418439924958 0.6689243530373028 [2.4266520173067523, 3.6749508863998552, 4.074651621148173, 2.0942286195853885, 2.1991858271552136, 2.2795249480008093, 2.2166085771831043, 2.214524950552583, 2.207360074310958, 2.19649687760674]
+lstmClean_v40 2.588823244839913 0.8683859600408463 [1.8816431403664178, 2.1682558373361966, 2.2915575711822176, 2.3444044684416165, 2.217308198480983, 2.341684028783044, 4.966827614879312, 2.1626562774786837, 3.315381970439296, 2.198513341011364]
+lstmClean_v50 2.43391285701289 0.4348999539562335 [2.07498150895936, 2.166114716689016, 2.2831068556129455, 3.5099202649516936, 2.9555229373620437, 2.487340951841938, 2.2387255232502232, 2.0995439242349745, 2.376638423414945, 2.1472334638117583]
+
+
+turning to cnn...as it performs better

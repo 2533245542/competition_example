@@ -1,0 +1,241 @@
+# experiment
+## phase 1
+''':arg
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn1.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn2; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn2.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn3; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn3.csv
+
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn1.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn2; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn2.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn3; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn3.csv
+
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn4; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn4.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn5; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn5.csv
+
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn4; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn4.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn5; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn5.csv
+'''
+
+'''
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm1.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm2; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm2.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm3; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm3.csv
+
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm1.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm2; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm2.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm3; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm3.csv
+
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm4; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm4.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm5; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm5.csv
+
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm4; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm4.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm5; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm5.csv
+'''
+
+### done
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn1.csv
+
+running
+
+
+
+
+## phase 2
+''':arg
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn1.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn2; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn2.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn3; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn3.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn4; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn4.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn5; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn5.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn6; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn6.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn7; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn7.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn8; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn8.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn9; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn9.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN1; rm resumable_file historicalHyperparameter; python run.py > cnn10; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn10.csv
+
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn1.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn2; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn2.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn3; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn3.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn4; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn4.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn5; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn5.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn6; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn6.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn7; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn7.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn8; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn8.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn9; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn9.csv
+cd ~/tmp/case_only_MAE30/caseOnly_MAE_CNN30; rm resumable_file historicalHyperparameter; python run.py > cnn10; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_cnn10.csv
+
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm1.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm2; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm2.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm3; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm3.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm4; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm4.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm5; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm5.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm6; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm6.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm7; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm7.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm8; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm8.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm9; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm9.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_validation30; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > clstm0; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm10.csv
+
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm1; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm1.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm2; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm2.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm3; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm3.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm4; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm4.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm5; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm5.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm6; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm6.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm7; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm7.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm8; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm8.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > lstm9; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm9.csv
+cd ~/tmp/case_only_MAE_fix_feature/caseOnly_MAE_fix_feature_long_validation1; rm resumable_file historicalHyperparameter; python caseOnly_resumable_revolutionalized_fix_length.py > clstm0; mv total_prediction_loss_timestamp.csv total_prediction_loss_timestamp_lstm10.csv
+
+
+
+'''
+
+
+
+# not-that-intuitive code modification
+set
+# simple code modification
+We are going to add CNN into the model
+
+There are hyperparameters related to CNN
+subRun.py
+line 35: when extracting hyperpatmeres from the variable 'hyperparameters', also extract CNN hyperparemters
+    feature_indices = hyperparameters[0]
+    in_batch_size = hyperparameters[1]
+    steps_ahead = hyperparameters[2]
+    dropout = hyperparameters[3]
+    recurrent_dropout = hyperparameters[4]
+    num_cells = hyperparameters[5]
+    learning_rate = hyperparameters[6]
+    cnn_filters = hyperparameters[7]
+    cnn_kernel_size = hyperparameters[8]
+    cnn_pool_size = hyperparameters[9]
+    cnn_dropout = hyperparameters[10]
+    cnn_kernel_size = min(in_batch_size, cnn_kernel_size)
+    cnn_pool_size = min(in_batch_size - cnn_kernel_size + 1, cnn_pool_size)
+    hyperparameters[8] = cnn_kernel_size
+    hyperparameters[9] = cnn_pool_size
+
+
+
+
+line 147: change model, and assign the CNN hyperparameters
+X_train = X_train.reshape((X_train.shape[0], 1, X_train.shape[1], len(feature_indices)))
+if test_length != 0:
+    X_test = X_test.reshape((X_test.shape[0], 1, X_test.shape[1], len(feature_indices)))
+model = Sequential()
+model.add(TimeDistributed(Conv1D(filters=cnn_filters, kernel_size=cnn_kernel_size, activation='relu'), input_shape=(None, in_batch_size, len(feature_indices))))
+model.add(TimeDistributed(MaxPooling1D(pool_size=cnn_pool_size)))
+model.add(Dropout(cnn_dropout))
+model.add(TimeDistributed(Flatten()))
+model.add(LSTM(num_cells, dropout=dropout, recurrent_dropout=recurrent_dropout))
+model.add(Dense(out_batch_size))
+model.compile(optimizer=Adam(lr=learning_rate), loss=train_loss)
+
+run.py
+line 68: initiate CNN hyperparameters
+hyperparameters, feature_indices, in_batch_size, steps_ahead, dropout, recurrent_dropout, num_cells, learning_rate, cnn_filters, cnn_kernel_size, cnn_pool_size, cnn_dropout = 1,1,1,1,1,1,1,1,1,1,1,1  # need to make variabels contain something to make it picklable
+
+line 75: load CNN hyperparameters
+hyperparameters = pickle.load(f)
+feature_indices = pickle.load(f)
+in_batch_size = pickle.load(f)
+steps_ahead = pickle.load(f)
+dropout = pickle.load(f)
+recurrent_dropout = pickle.load(f)
+num_cells = pickle.load(f)
+learning_rate = pickle.load(f)
+cnn_filters = pickle.load(f)
+cnn_kernel_size = pickle.load(f)
+cnn_pool_size = pickle.load(f)
+cnn_dropout = pickle.load(f)
+
+line 96: save CNN hyperparemters
+pickle.dump(hyperparameters, f)
+pickle.dump(feature_indices, f)
+pickle.dump(in_batch_size, f)
+pickle.dump(steps_ahead, f)
+pickle.dump(dropout, f)
+pickle.dump(recurrent_dropout, f)
+pickle.dump(num_cells, f)
+pickle.dump(learning_rate, f)
+pickle.dump(cnn_filters, f)
+pickle.dump(cnn_kernel_size, f)
+pickle.dump(cnn_pool_size, f)
+pickle.dump(cnn_dropout, f)
+
+line 132: extract CNN hyperparemtaers
+feature_indices = hyperparameters[0]
+in_batch_size = hyperparameters[1]
+steps_ahead = hyperparameters[2]
+dropout = hyperparameters[3]
+recurrent_dropout = hyperparameters[4]
+num_cells = hyperparameters[5]
+learning_rate = hyperparameters[6]
+cnn_filters = hyperparameters[7]
+cnn_kernel_size = hyperparameters[8]
+cnn_pool_size = hyperparameters[9]
+cnn_dropout = hyperparameters[10]
+cnn_kernel_size = min(in_batch_size, cnn_kernel_size)
+cnn_pool_size = min(in_batch_size - cnn_kernel_size + 1, cnn_pool_size)
+hyperparameters[8] = cnn_kernel_size  # hyperparemters will be saved, so make the change
+hyperparameters[9] = cnn_pool_size # hyperparemters will be saved, so make the change
+
+
+
+
+line 221: assign CNN hyperparameters
+X_train = X_train.reshape((X_train.shape[0], 1, X_train.shape[1], len(feature_indices)))
+X_test = X_test.reshape((X_test.shape[0], 1, X_test.shape[1], len(feature_indices)))
+model = Sequential()
+model.add(TimeDistributed(Conv1D(filters=cnn_filters, kernel_size=cnn_kernel_size, activation='relu'), input_shape=(None, in_batch_size, len(feature_indices))))
+model.add(TimeDistributed(MaxPooling1D(pool_size=cnn_pool_size)))
+model.add(Dropout(cnn_dropout))
+model.add(TimeDistributed(Flatten()))
+model.add(LSTM(num_cells, dropout=dropout, recurrent_dropout=recurrent_dropout))
+model.add(Dense(out_batch_size))
+model.compile(optimizer=Adam(lr=learning_rate), loss=train_loss)
+
+
+config.py
+line 68: add hyperparameter space for CNN hyperparameters
+space = [
+    hp.choice('feature_indices', indice_list[-1:]),
+    hp.choice('in_batch_size', [4,9]),
+    hp.choice('steps_ahead', [1]),
+    hp.choice('dropout', [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]),
+    hp.choice('recurrent_dropout', [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]),
+    hp.choice('num_cells', [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]),
+    hp.lognormal('learning_rate', np.log(.01), 3.),
+    hp.choice('cnn_filters', [10, 20, 30, 50, 70, 100, 130, 160]),
+    hp.choice('cnn_kernel_size', [1,3,5,7,9]),
+    hp.choice('cnn_pool_size', [1,2,3,4,5,6]),
+    hp.choice('cnn_dropout', [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8])
+]
+
+
+####################################################################################################
+model = Sequential()
+model.add(TimeDistributed(Conv1D(filters=cnn_filters, kernel_size=cnn_kernel_size, activation='relu'), input_shape=(in_batch_size, len(feature_indices))))
+model.add(TimeDistributed(MaxPooling1D(pool_size=cnn_pool_size)))
+model.add(Dropout(cnn_dropout))
+model.add(TimeDistributed(Flatten()))
+model.add(LSTM(num_cells, dropout=dropout, recurrent_dropout=recurrent_dropout))
+model.add(Dense(out_batch_size))
+model.compile(optimizer=Adam(lr=learning_rate), loss=train_loss)
+
+cnn_filters
+cnn_kernel_size
+cnn_pool_size
+cnn_dropout
+
+
+
+
+model = Sequential()
+model.add(LSTM(num_cells, dropout=dropout, recurrent_dropout=recurrent_dropout, input_shape=(in_batch_size, len(feature_indices))))
+model.add(Dense(out_batch_size))
+model.compile(optimizer=Adam(lr=learning_rate), loss=train_loss)
+
+scp -r wzhou87@app14:~/tmp/decide/decideEpoch/lstmClean .
+scp -r wzhou87@app14:~/tmp/decide/decideEpoch/cnnClean .

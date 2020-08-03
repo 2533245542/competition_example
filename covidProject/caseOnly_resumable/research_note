@@ -1,0 +1,25 @@
+We need to make case_model_auto_tuned.py resumable
+also save the prediction and respectie time stamp
+
+# loss function selection
+now i am testing the loss function
+MSE, MSLE, MAE, MQPE
+it turns out MSLE is the best
+
+# now I test if clipping the ancient data away will improve the prediction error
+
+# try to have more search
+
+# try to have some random search first and then guided search
+# doing 50 guided search
+100%|██████████| 50/50 [12:27<00:00, 14.95s/trial, best loss: 3.142857142857143]
+
+# doing 25 random and 25 guided search
+
+# should first test the hyperparemter combination that is used in the last sliding window
+
+# interval 30 is better than tuning 5 and 1
+Check plots to see why
+
+
+

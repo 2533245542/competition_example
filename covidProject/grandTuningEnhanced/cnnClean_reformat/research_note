@@ -1,0 +1,15 @@
+do transfer learning
+in a sliding window
+    before training on 663, first train a model on the rest sites. using lambda 1 save the weights
+    load weights before training on 663, using lambda 2
+
+when tuning
+    an lambda evaluation includes
+        train a model on the rest of the dataset, this conducts one lambda search and produces lamdba 1, save the weights
+
+in a sliding window
+    load weights
+    make layers other than the dense layer non-trainable
+    train a model on the 663 dataset, and predict
+
+do more tuning in the first time, less afterwards, or set a limit until converge

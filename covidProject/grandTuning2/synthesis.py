@@ -1,0 +1,20 @@
+import pandas as pd
+
+#%%
+templateDirectoryCommandDict = {'cnnClean': 'run.py'}
+tune_interval_list = [1,3,5,7,9,12,15,30]
+days_ahead_list = [1,2,3,4,5,6]
+repetitions = 5
+paths = []
+commands = []
+
+df_servers = []
+for tune_interval in tune_interval_list:
+    for days_ahead in days_ahead_list:
+        for server in ['app14', 'bime']:
+            df = pd.read_csv('{}/cnnClean_i{}_a{}.csv'.format(server, tune_interval, days_ahead))
+            df['i'] = tune_interval
+            df['a'] = days_ahead
+            df_servers.append(df)
+
+pd.concat(df_servers).groupby(['testDataTimeStamps', 'i', 'a'], as_index=False).mean().to_csv('total.csv', index=False)
